@@ -1,0 +1,26 @@
+generated: '2026-08-01'
+method: searched
+source: public package-registry search
+packages: []
+official_sdk_count: 0
+notes: >-
+  No first-party Carrum Health client library exists in any public package registry, and
+  the provider ships no SDK or CLI. Because official_sdk_count is 0, no `SDKs` pointer was
+  wired into apis.yml.
+registries_searched:
+- registry: npm
+  query: carrum, carrumhealth
+  results: 0
+- registry: pypi
+  query: carrum, carrum-health
+  results: 0 (both HTTP 404)
+- registry: github
+  query: 'org:carrumhealth'
+  results: >-
+    11 public repositories, 8 of them forks (heroku-buildpack-rubygem-server,
+    haproxy-buildpack, digger, digger-helm-charts, dummyidp, grommet, CRM-Sample,
+    dbt-adapters) plus carrumhealth.github.io (a "Technology website" that now redirects to
+    the non-resolving technology.carrumhealth.com), heroku-buildpack-bash and csec-assets.
+    None is a client library or API SDK.
+x-evidence:
+  fetched: '2026-08-01'

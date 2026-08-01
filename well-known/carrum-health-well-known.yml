@@ -1,0 +1,128 @@
+generated: '2026-08-01'
+method: probed
+source: live probe of every Carrum Health host found in apis.yml and the public member-application bundle
+notes: >-
+  Every /.well-known/ path was probed on the marketing host (carrumhealth.com), the
+  member portal (my.carrumhealth.com) and the five platform service hosts. The marketing
+  host is WordPress and answers 404 with an HTML body for all of them. The member portal
+  is a single-page application whose catch-all answers HTTP 200 with the SPA HTML shell
+  for every path, so its 200s are false positives and are recorded as such. The only
+  genuine well-known document in the estate is core-service's A2A agent registry.
+hosts:
+- host: https://core-service.carrumhealth.com
+  documents:
+  - path: /.well-known/agents.json
+    status: 200
+    content_type: application/a2a+json; charset=utf-8
+    file: carrum-health-agents.json
+    note: >-
+      A2A agent registry, schema_version v1, agents[] is EMPTY. This is a registry index,
+      not an AgentCard — it carries none of name/url/version/protocolVersion/capabilities/skills,
+      so no a2a/ artifact was written.
+  - path: /.well-known/agent-card.json
+    status: 404
+    content_type: application/json; charset=utf-8
+    note: 'JSON error body: {"error":{"message":"No agents registered"}} — an A2A-aware
+      handler is deployed but no card is published.'
+  - path: /.well-known/agent.json
+    status: 404
+    content_type: application/json; charset=utf-8
+    note: 'Same handler: {"error":{"message":"No agents registered"}}'
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/mcp.json
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+- host: https://care-service.carrumhealth.com
+  documents:
+  - path: /.well-known/agents.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+- host: https://message-service.carrumhealth.com
+  documents:
+  - path: /.well-known/agents.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+- host: https://price-service.carrumhealth.com
+  documents:
+  - path: /.well-known/agents.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+- host: https://upload-service.carrumhealth.com
+  documents:
+  - path: /.well-known/agents.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+- host: https://carrumhealth.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/agents.json
+    status: 404
+- host: https://my.carrumhealth.com
+  spa_catch_all: true
+  documents:
+  - path: /.well-known/*
+    status: 200
+    content_type: text/html; charset=utf-8
+    note: >-
+      Expo/React single-page-app catch-all returns the same 7,273-byte HTML shell for every
+      path, including /openapi.json, /llms.txt and every /.well-known/* probe. All 200s on
+      this host are rejected as false positives.
+security_txt:
+  present: false
+  probed:
+  - https://carrumhealth.com/.well-known/security.txt
+  - https://carrumhealth.com/security.txt
+  - https://core-service.carrumhealth.com/.well-known/security.txt
+x-evidence:
+  fetched: '2026-08-01'

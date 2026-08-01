@@ -1,0 +1,72 @@
+generated: '2026-08-01'
+method: probed
+source: live probe of carrumhealth.com, my.carrumhealth.com and the five platform service hosts
+notes: >-
+  No OpenAPI, AsyncAPI, GraphQL SDL or MCP manifest is published by Carrum Health, so no
+  standard could be asserted from a specification. Every entry below is either an observed
+  live response or a recorded absence.
+standards:
+- id: openapi
+  conforms: false
+  evidence: >-
+    No spec at /openapi.json, /openapi.yaml, /swagger.json, /v1/openapi.json, /api-docs,
+    /docs or /redoc on carrumhealth.com or any of the five *-service.carrumhealth.com hosts.
+    /api-docs exists on all five services but answers 401 Basic — a private documentation
+    surface, not a published contract.
+- id: a2a
+  conforms: partial
+  evidence: >-
+    core-service.carrumhealth.com serves /.well-known/agents.json with HTTP 200 and
+    content-type application/a2a+json — a real A2A registry document (schema_version v1).
+    The agents[] array is EMPTY and /.well-known/agent-card.json returns 404
+    {"error":{"message":"No agents registered"}}, so no AgentCard is published. A2A-aware
+    infrastructure is deployed; no agent is registered against it.
+  artifact: well-known/carrum-health-agents.json
+- id: rfc8615-well-known
+  conforms: true
+  evidence: core-service serves a well-known URI (/.well-known/agents.json) at HTTP 200.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on every host probed.
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 security scheme published; /.well-known/oauth-authorization-server 403/404.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 on every host.
+- id: rfc9457-problem-details
+  conforms: unknown
+  evidence: >-
+    Error bodies observed are HTML 404s from the Rails stack and a bare JSON object
+    ({"error":{"message":"..."}}) from the A2A handler — not application/problem+json,
+    but the private API surface could not be observed.
+- id: mcp
+  conforms: false
+  evidence: /mcp and /.well-known/mcp.json return 404 on every host.
+- id: asyncapi
+  conforms: false
+  evidence: No event, streaming or webhook surface is published or documented.
+- id: hipaa
+  conforms: true
+  evidence: >-
+    Carrum Health handles Protected Health Information as defined by HIPAA and describes
+    PHI handling in its published privacy statement
+    (https://carrumhealth.com/privacy-statement/). Carrum operates a Vanta-hosted trust
+    center at https://trust.carrumhealth.com/ (HTTP 200); the certification list on that
+    page is rendered client-side and could not be read anonymously, so no specific
+    certification is asserted here.
+- id: ccpa
+  conforms: true
+  evidence: >-
+    Privacy statement documents California Consumer Privacy Act rights and a
+    privacy@carrumhealth.com rights-request contact.
+compliance_program:
+  trust_center: https://trust.carrumhealth.com/
+  platform: Vanta Trust Report
+  http_status: 200
+  certifications_listed: unknown
+  note: >-
+    Certification names are loaded by JavaScript from the Vanta API and are not present in
+    the anonymously served HTML; the trust center's existence is verified, its contents are not.
+x-evidence:
+  fetched: '2026-08-01'

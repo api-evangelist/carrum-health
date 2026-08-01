@@ -1,0 +1,43 @@
+generated: '2026-08-01'
+method: probed
+probe: true
+url: https://trust.carrumhealth.com/
+platform: Vanta Trust Report
+http_status: 200
+certifications: []
+certifications_status: not-readable-anonymously
+notes: >-
+  trust.carrumhealth.com resolves and returns HTTP 200 with a Vanta-hosted trust report
+  shell (data-slugid 2ef014xim0w2hhdngzjeb6, assets served from assets.vanta.com). The
+  certification, control and subprocessor lists are fetched client-side from the Vanta API,
+  which requires authorization (api.vanta.com returns 401 anonymously and its GraphQL
+  endpoint has been retired), so no certification name could be verified. The trust center's
+  existence is confirmed; its contents are deliberately NOT asserted here rather than
+  guessed. Re-run with a JS-capable fetch to enumerate certifications.
+  The automated probe (probe-security-programs.py) did not record this hit because the
+  anonymously served HTML carries fewer than its two-keyword threshold; this file was
+  written from a manual verified probe.
+x-evidence:
+  fetched: '2026-08-01'
+  url: https://trust.carrumhealth.com/
+  http_status: 200
+  content_type: text/html
+  tls: TLSv1.3
+  hsts: max-age=31536000; includeSubDomains
+  markers:
+  - assets.vanta.com/static/index-trust-report
+  - data-slugid="2ef014xim0w2hhdngzjeb6"
+  - '<meta name="keywords" content="Trust, Security, Compliance, Automation">'
+vulnerability_disclosure:
+  present: false
+  probed:
+  - {url: 'https://carrumhealth.com/.well-known/security.txt', status: 404}
+  - {url: 'https://carrumhealth.com/security.txt', status: 404}
+  - {url: 'https://carrumhealth.com/security', status: 404}
+  - {url: 'https://carrumhealth.com/responsible-disclosure', status: 404}
+  - {url: 'https://carrumhealth.com/vulnerability-disclosure', status: 404}
+  - {url: 'https://hackerone.com/carrumhealth', status: 404}
+  - {url: 'https://bugcrowd.com/carrumhealth', status: 404}
+  note: >-
+    No security.txt, no disclosure page and no bug-bounty program was found, so no
+    vulnerability-disclosure artifact and no `Security` pointer was written.

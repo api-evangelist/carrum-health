@@ -1,23 +1,129 @@
 aid: carrum-health
 name: Carrum Health
-description: 'Carrum Health is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Carrum Health operates a value-based Centers of Excellence (COE) platform
+  that connects self-insured employers and their members with a curated national network
+  of surgical, cancer and substance-use-care providers under upfront bundled payments.
+  Founded in 2014, the company pairs a member-facing mobile and web application with
+  a care-navigation team so members are guided through the full episode of care with
+  no deductibles, co-pays or surprise bills, and a 30-day warranty on each procedure.
+  Carrum sells to employers and benefits consultants and integrates with health plans,
+  TPAs and point-solution partners such as Hinge Health, Sword Health, AccessHope,
+  Teladoc and Accolade. Carrum publishes no public developer program: there is no
+  public API portal, OpenAPI definition, SDK or documentation host. The platform is
+  backed by a set of internet-facing REST services (core, care, message, price and
+  upload) discovered in the public member-application bundle, each of which serves
+  an HTTP Basic-gated /api-docs surface, and core-service publishes an A2A agent registry
+  at /.well-known/agents.json that is currently empty.'
 url: https://raw.githubusercontent.com/api-evangelist/carrum-health/refs/heads/main/apis.yml
+image: https://carrumhealth.com/wp-content/uploads/2026/06/Color-Logo.png
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment-pipeline
 specificationVersion: '0.20'
 created: '2026-08-01'
 modified: '2026-08-01'
 tags:
 - Company
-apis: []
+- Healthcare
+- Health Benefits
+- Centers of Excellence
+- Value-Based Care
+- Bundled Payments
+- Employee Benefits
+- Surgery
+- Care Navigation
+- Digital Health
+apis:
+- name: Carrum Health Platform Services
+  description: 'The internet-facing REST services that power the Carrum Health member
+    application (my.carrumhealth.com): core-service (accounts, episodes, profiles),
+    care-service, message-service, price-service and upload-service, each also deployed
+    to staging, uat, demo, perf, compliance and mirror environments. These hosts were
+    observed in the provider''s own publicly served web-application bundle. No public
+    documentation, OpenAPI definition or self-service onboarding is published; every
+    /api-docs surface answers HTTP 401 with a WWW-Authenticate: Basic challenge, so
+    the API program is private/partner-only.'
+  humanURL: https://my.carrumhealth.com/
+  baseURL: https://core-service.carrumhealth.com
+  tags:
+  - Healthcare
+  - Private API
+  - Undocumented
+  x-access: private
+  x-evidence:
+    fetched: '2026-08-01'
+    source: https://my.carrumhealth.com/_expo/static/js/web/index-3f3b9077c59caf479bc45d670e61ddfa.js
+    hosts:
+    - https://core-service.carrumhealth.com
+    - https://care-service.carrumhealth.com
+    - https://message-service.carrumhealth.com
+    - https://price-service.carrumhealth.com
+    - https://upload-service.carrumhealth.com
+    api_docs_probe:
+      url: https://core-service.carrumhealth.com/api-docs
+      http_status: 401
+      www_authenticate: Basic
+  properties:
+  - type: Authentication
+    url: authentication/carrum-health-authentication.yml
+  - type: WellKnown
+    url: well-known/carrum-health-well-known.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/carrum-health-domain-security.yml
 - type: Website
+  url: https://carrumhealth.com/
+- type: Blog
+  url: https://carrumhealth.com/carrum-blog/
+- type: BlogRSS
+  url: https://carrumhealth.com/carrum-blog/feed/
+- type: Support
+  url: https://carrumhealth.com/contact-us/
+- type: Login
+  url: https://my.carrumhealth.com/login
+- type: TermsOfService
+  url: https://carrumhealth.com/terms-of-use/
+- type: PrivacyPolicy
+  url: https://carrumhealth.com/privacy-statement/
+- type: GitHubOrganization
+  url: https://github.com/carrumhealth
+- type: TrustCenter
+  url: security/carrum-health-trust-center.yml
+- type: Compliance
+  url: https://trust.carrumhealth.com/
+- type: Newsroom
+  url: https://carrumhealth.com/newsroom/
+- type: Careers
+  url: https://carrumhealth.com/careers/
+- type: Accessibility
+  url: https://carrumhealth.com/accessibility-statement/
+- type: MobileApplication
+  url: https://apps.apple.com/us/app/carrum-health/id1403041263
+- type: MobileApplication
+  url: https://play.google.com/store/apps/details?id=com.carrumhealth.patientapp
+- type: SecondaryMarketListing
   url: https://forgeglobal.com/carrum-health_stock/
+- type: WellKnown
+  url: well-known/carrum-health-well-known.yml
+- type: Authentication
+  url: authentication/carrum-health-authentication.yml
+- type: Conformance
+  url: conformance/carrum-health-conformance.yml
+- type: Lifecycle
+  url: lifecycle/carrum-health-lifecycle.yml
+- type: Packages
+  url: packages/carrum-health-packages.yml
+- type: LLMsTxt
+  url: llms/carrum-health-llms.txt
+x-enrichment:
+  date: '2026-08-01'
+  status: enriched
+  artifacts_added: 8
+  pass: local-v1
+

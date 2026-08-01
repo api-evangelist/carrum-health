@@ -1,0 +1,62 @@
+generated: '2026-08-01'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: carrumhealth.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 20 06:17:57 2026 GMT
+  hsts: true
+  hsts_max_age: 31622400
+- host: my.carrumhealth.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 29 23:59:59 2026 GMT
+  hsts: false
+- host: core-service.carrumhealth.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 29 23:59:59 2026 GMT
+  hsts: false
+- host: care-service.carrumhealth.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 29 23:59:59 2026 GMT
+  hsts: false
+- host: message-service.carrumhealth.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 29 23:59:59 2026 GMT
+  hsts: false
+- host: price-service.carrumhealth.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 29 23:59:59 2026 GMT
+  hsts: false
+- host: upload-service.carrumhealth.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 29 23:59:59 2026 GMT
+  hsts: false
+- host: trust.carrumhealth.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 12 23:59:44 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: true
+notes: >-
+  The four additional *-service hosts and the trust center were probed directly on
+  2026-08-01 with the same TLS/HSTS method; none of the five API service hosts sets
+  Strict-Transport-Security, while the marketing host and the Vanta-hosted trust center
+  both do.
+domains:
+- domain: carrumhealth.com
+  dnssec: false
+  caa:
+  - 0 issue "amazon.com"
+  - 0 issue "godaddy.com"
+  - 0 issue "letsencrypt.org"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

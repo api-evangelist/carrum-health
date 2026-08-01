@@ -1,0 +1,38 @@
+generated: '2026-08-01'
+method: probed
+source: live probe + search of carrumhealth.com and the Carrum Health GitHub organization
+notes: >-
+  Carrum Health runs no public developer program, so there is no published versioning
+  policy, deprecation policy, SLA, changelog or status page. Recorded absences below are
+  probe results, not assumptions.
+versioning:
+  scheme: unknown
+  current: null
+  docs: null
+  evidence: >-
+    No public version policy. The member-application bundle references an /api/v2/ path
+    prefix, indicating an internal major-version scheme on the platform services, but no
+    version contract is published.
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  evidence: No deprecation or sunset policy page found on carrumhealth.com.
+sla:
+  url: null
+  uptime_target: null
+status_page:
+  url: null
+  probed:
+  - url: https://status.carrumhealth.com/
+    result: DNS NXDOMAIN
+  - url: https://carrumhealth.statuspage.io/
+    result: redirects to https://www.atlassian.com/software/statuspage (marketing page, not a
+      provisioned status page)
+changelog:
+  url: null
+  evidence: >-
+    carrumhealth.com publishes a newsroom (https://carrumhealth.com/newsroom/) and a blog
+    (https://carrumhealth.com/carrum-blog/) but no dated product or API changelog.
+deprecated_operations: []
+x-evidence:
+  fetched: '2026-08-01'

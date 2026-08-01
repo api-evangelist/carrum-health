@@ -1,0 +1,57 @@
+generated: '2026-08-01'
+method: probed
+source: live HTTP probe of the Carrum Health platform service hosts
+docs: null
+notes: >-
+  Carrum Health publishes no OpenAPI definition and no public authentication documentation,
+  so this profile could not be derived from a specification. It records what was actually
+  observed on the wire against the five internet-facing platform services discovered in the
+  provider's public member-application bundle. Nothing here is asserted beyond an observed
+  HTTP response.
+summary:
+  types:
+  - http
+  api_key_in: []
+  oauth2_flows: []
+  public_developer_auth: false
+  self_service_onboarding: false
+schemes:
+- name: apiDocsBasic
+  type: http
+  scheme: basic
+  applies_to: /api-docs
+  description: >-
+    Every platform service gates its API documentation surface behind HTTP Basic
+    authentication. Observed response: 401 with `WWW-Authenticate: Basic realm=""`.
+  sources:
+  - https://core-service.carrumhealth.com/api-docs
+  - https://care-service.carrumhealth.com/api-docs
+  - https://message-service.carrumhealth.com/api-docs
+  - https://price-service.carrumhealth.com/api-docs
+  - https://upload-service.carrumhealth.com/api-docs
+discovery:
+  openid_configuration: absent
+  oauth_authorization_server: absent
+  oauth_protected_resource: absent
+  notes: >-
+    /.well-known/openid-configuration and /.well-known/oauth-protected-resource return 404 on
+    every host; /.well-known/oauth-authorization-server returns 403 on core-service (edge
+    block, not a document). Member sign-in happens in the my.carrumhealth.com application
+    behind an activation/registration flow; the token exchange is not publicly documented.
+x-evidence:
+  fetched: '2026-08-01'
+  probes:
+  - url: https://core-service.carrumhealth.com/api-docs
+    http_status: 401
+    www_authenticate: Basic realm=""
+    server_headers_observed:
+    - x-request-id
+    - x-runtime
+  - url: https://care-service.carrumhealth.com/api-docs
+    http_status: 401
+  - url: https://message-service.carrumhealth.com/api-docs
+    http_status: 401
+  - url: https://price-service.carrumhealth.com/api-docs
+    http_status: 401
+  - url: https://upload-service.carrumhealth.com/api-docs
+    http_status: 401
