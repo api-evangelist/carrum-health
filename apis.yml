@@ -15,6 +15,17 @@ description: 'Carrum Health operates a value-based Centers of Excellence (COE) p
   an HTTP Basic-gated /api-docs surface, and core-service publishes an A2A agent registry
   at /.well-known/agents.json that is currently empty.'
 url: https://raw.githubusercontent.com/api-evangelist/carrum-health/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://carrumhealth.com/wp-content/uploads/2026/06/Color-Logo.png
 x-type: company
 x-source: harvest:secondary-market
